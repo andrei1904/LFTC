@@ -1,37 +1,42 @@
 ﻿1.
 
-<program> ::= <type> ID(<parameter_list>) {<variable_declaration> <instruction_list>}
+<program> ::= <definition> [<function>] <main>
 
-<type> ::= <type_no_void> | <void_type>
-<type_no_void> ::= <primitive_type> | <struct_type>
-<primitive_type> ::= int | double
+<definition> ::= "#include < iostream >
+                  using namespaces std ;"
+
+<main> ::= "int main ( ) {" [<variable_declaration>] [<instruction_list>] "return 0 ; }"
+
+<function> ::= <type> ID(<parameter_list>) {<variable_declaration> <instruction_list>}
+
+<type> ::= <type_no_void> | void
+<type_no_void> ::= int | double | <struct_type>
 <struct_type> ::= struct ID {<variable_declaration>};
-<void_type> ::= void
 
-<parameter_list> ::= <type_no_void> <variable>",", <parameter_list> | <type_no_void> <variable>
+<parameter_list> ::= <type_no_void> <variable>" , ", <parameter_list> | <type_no_void> <variable>
 
-<variable_declaration> ::= <type_no_void> <variable_list>";" | <type_no_void> <assign>";"
-<variable_list> ::= <variable>",", <variable_list> | <variable>
+<variable_declaration> ::= <type_no_void> <variable_list>" ;" | <type_no_void> <assign>" ;"
+<variable_list> ::= <variable>" , ", <variable_list> | <variable>
 <variable> ::= ID
 
-<instruction_list> ::= <instruction>;<instruction_list> | ..
-<instruction_list> ::= <instruction>
-<instruction> ::= <assign> | <conditional_instruction> | <loop_instruction> | <read> | <write>
+<instruction_list> ::= <instruction>;<instruction_list> | <instruction>
+<instruction> ::= <assign> | <conditional_instruction> | <loop_instruction> | <read> | <write> | <function_call>
 
 <assign> ::= ID = <expression>
 <expression> ::= ID | CONST | <expression> <arithmetic_operator> <expression>
-<arithmetic_operator> ::= "+" | "-" | "*" | "/" | "%"
+<arithmetic_operator> ::= " + " | " - " | " * " | " / " | " % "
 
 <conditional_instruction> ::= if (<conditional_expression) {<instruction_list>} |
                   if (<conditional_expression) {<instruction_list>} else {<instruction_list>}
 <conditional_expression> ::= <expression> <relational_operator> <expression>
-<relational_operator> ::= "<" | ">" | "==" | "!=" | "<=" | ">="
-                  
+<relational_operator> ::= " < " | " > " | " == " | " != " | " <= " | " >= "
+
 <loop_instruction> ::= while (<conditional_expression>) {instruction_list}
 
-<read> ::= <var> = read_<primitive_type>();
-<write> ::= write(<expression>);
+<read> ::= cin >> <var> " ;"
+<write> ::= cout << expression " ;"
 
+<function_call> ::= ID(variable_list) | ID() " ;"
 
 ID ::= [a-zA-Z][a-zA-Z0-9]{0,7}
 CONST ::= <int> | <double>
@@ -44,66 +49,118 @@ reserved words: int, double, struct, void, while, if, else, read_int, read_doubl
 
 
 2.
+#include < iostream >
 
-void perimetruArie(double raza) {
-    double pi = 3.14;
-    
-    double perimetru = 2 * pi * raza;
-    double arie = pi * raza * raza;
-    
-    write(perimetru);
-    write(arie);
+using namespace std ;
+
+void perimetruArie( double raza ) {
+    double pi = 3.14 ;
+
+    double perimetru = 2 * pi * raza ;
+    double arie = pi * raza * raza ;
+
+    cout << perimetru ;
+    cout << arie ;
 }
 
+int main ( ) {
+    double raza = 4 ;
+    perimetruArie ( raza ) ;
 
-void cmmdc(int a, int b) {
-    
-    while (b != 0) {
-        int r = a % b;
-        a = b;
-        b = r;
-    }
-    
-    write(a);
+    return 0 ;
 }
 
+------------------------------
 
-void suma(int n) {
-    int suma = 0;
-    
-    while (n > 0) {
-        n = n - 1;
-        int nr;
-        nr = read_int();
-        suma = suma + nr;
+#include < iostream >
+
+using namespace std ;
+
+void cmmdc ( int a , int b ) {
+
+    while ( b != 0 ) {
+        int r = a % b ;
+        a = b ;
+        b = r ;
     }
-    
-    write(suma);
+
+    cout << a ;
+}
+
+int main ( )  {
+    int a = 5 ;
+    int b = 10 ;
+    cmmdc ( a , b ) ;
+
+    return 0 ;
+}
+
+------------------------------
+
+#include < iostream >
+
+using namespace std ;
+
+void suma ( int n ) {
+    int suma = 0 ;
+
+    while ( n > 0 ) {
+        n = n - 1 ;
+        int nr ;
+        cin >> nr ;
+        suma = suma + nr ;
+    }
+
+    cout << suma ;
+}
+
+int main ( ) {
+    int n = 10 ;
+    suma ( n ) ;
+
+    return 0 ;
 }
 
 
 3.
+#include < iostream >
 
-void program() {
-    int 3i = 0;
-    
-    if (3i + 1 = 2) {
-        3i = 5;
+using namespace std ;
+
+void program ( ) {
+    int 3i = 0 ;
+
+    if ( 3i + 1 = 2 ) {
+        3i = 5 ;
     }
 }
 
+int main ( ) {
+    program ( ) ;
 
-void program() {
-    int x = 1;
-    
-    if (x != 0) {
-        x--;
+    return 0 ;
+}
+
+----------------------------
+
+#include < iostream >
+
+using namespace std ;
+
+void program ( ) {
+    int x = 1 ;
+
+    if ( x != 0 ) {
+        x-- ;
     }
-    
-    for (int i = 0; i < 7; i+=1) {
-        ++x;
+
+    for ( int i = 0 ; i < 7 ; i += 1) {
+        ++x ;
     }
 }
 
+int main ( ) {
+    program ( ) ;
 
-
+    return 0 ;
+}
