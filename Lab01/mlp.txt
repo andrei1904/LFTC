@@ -2,12 +2,13 @@
 
 <program> ::= <definition> [<function>] <main>
 
-<definition> ::= "#include < iostream >
-                  using namespaces std ;"
+<definition> ::= "#include <iostream>
+                  using namespace std ;"
 
-<main> ::= "int main ( ) {" [<variable_declaration>] [<instruction_list>] "return 0 ; }"
+<main> ::= "int main() {" [<variable_declaration>] [<instruction_list>] "return 0 ; }"
 
-<function> ::= <type> ID(<parameter_list>) {<variable_declaration> <instruction_list>}
+<function> ::= <type> ID(<parameter_list>) { <variable_declaration> <instruction_list>
+                [return <type>] ; }
 
 <type> ::= <type_no_void> | void
 <type_no_void> ::= int | double | <struct_type>
@@ -45,11 +46,12 @@ digits ::= "0" | digitsNoZero
 <int> ::= "0" | ["+"|"-"]digitsNoZero{digits}
 <double> ::= ["+"|"-"]{digits}"."{digits}digitsNoZero|{digits}
 
-reserved words: int, double, struct, void, while, if, else, read_int, read_double, write
+reserved words: int, double, struct, void, while, if, else, read_int, read_double, write,
+                #include, <iostream>, using, namespace, std, main()
 
 
 2.
-#include < iostream >
+#include <iostream>
 
 using namespace std ;
 
@@ -72,7 +74,7 @@ int main ( ) {
 
 ------------------------------
 
-#include < iostream >
+#include <iostream>
 
 using namespace std ;
 
@@ -97,7 +99,7 @@ int main ( )  {
 
 ------------------------------
 
-#include < iostream >
+#include <iostream>
 
 using namespace std ;
 
@@ -123,7 +125,7 @@ int main ( ) {
 
 
 3.
-#include < iostream >
+#include <iostream>
 
 using namespace std ;
 
@@ -143,7 +145,7 @@ int main ( ) {
 
 ----------------------------
 
-#include < iostream >
+#include <iostream>
 
 using namespace std ;
 
