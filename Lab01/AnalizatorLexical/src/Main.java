@@ -1,3 +1,6 @@
+import utils.Reader;
+
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -5,9 +8,17 @@ public class Main {
 
         Reader reader = new Reader();
 
-        List<String> result = reader.readLexicalAtomsFromFile("C:\\Fac\\Sem5\\LFTC\\Lab01\\suma.txt");
+        List<String> data = reader.readLexicalAtomsFromFile("C:\\Fac\\Sem5\\LFTC\\Lab01\\suma.txt");
+        HashMap<String, Integer> atomCode = reader.readAtomCodeFromFile("C:\\Fac\\Sem5\\LFTC\\Lab01\\atomCode.txt");
+        Analizator analizator = new Analizator(data, atomCode);
 
-        result.forEach(System.out::println);
+        data.forEach(System.out::println);
+
+        try {
+            analizator.analyzeData();
+        } catch (Exception ex) {
+            System.out.println("Error at: " + ex.getMessage());
+        }
 
     }
 }
