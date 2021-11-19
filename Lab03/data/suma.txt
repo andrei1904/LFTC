@@ -12,6 +12,10 @@ void suma(int n) {
         s = s + nr;
     }
 
+    daca (s) atunci
+        cout << s;
+    sfdaca;
+
     cout << s;
 }
 
